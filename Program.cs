@@ -165,7 +165,12 @@ namespace larissza7
             {
                 return series.Where(x => x.studio == s).Select(x => x.title).ToList();
             }
-            series.OrderByDescending(x=> x.EPS())
+            series.OrderByDescending(x => x.E()).Select(x => x.title).First();
+            double atlagosErtekeles = series.Where(x => x.E() >= 20).Average(x => x.RR());
+            List<string> GS()
+            {
+                return series.Select(x => x.genre).Distinct().ToList();
+            }
         }
 
     }
