@@ -172,7 +172,7 @@ namespace larissza7
             {
                 return series.Select(x => x.genre).Distinct().ToList();
             }
-                        List<Product> products = new List<Product>()
+                                 List<Product> products = new List<Product>()
 {
     new Product("Galaxy S24", "Phone", "Samsung"),
     new Product("iPhone 15", "Phone", "Apple"),
@@ -180,7 +180,7 @@ namespace larissza7
     new Product("ThinkPad E14", "Laptop", "Lenovo"),
     new Product("MacBook Air", "Laptop", "Apple"),
 
-   
+
 
 
 
@@ -197,13 +197,35 @@ namespace larissza7
             products[4].SS(8);
 
 
-            
-            products.GroupBy(x => x.category).Select(y => new { Category = y.Key, Count = y.Count() });
-             products.GroupBy(x => x.manufacturer).Select(y => new { Manufacturer = y.Key, AP = y.Average(p => p.PR()) });
-            products.GroupBy(x=> x.category).Select(y => new {Category = y.Key, MP = y.OrderByDescending(p => p.PR()).First().name });
-         products.GroupBy(x=>x.category).Select(x=> x.OrderByDescending(p => p.RS()).First()).Select(y => new { Category = y.category, MS = y.category }); //<- CoPilot nem tudtam azt hogy 2 select is lehet benne
-        }
-        }
+
+            products.GroupBy(x => x.category).ToDictionary(x=> x.Key, x=> x.Count());
+            products.GroupBy(x => x.manufacturer).ToDictionary(x=> x.Key, x=> x.Average(y => y.PR()));
+            products.GroupBy(x => x.category).ToDictionary(x=> x.Key, x=> x.OrderByDescending(y => y.PR()).Select(y=> y.name).First());
+            products.GroupBy(x=> x.category).OrderByDescending(x=> x.Sum(y=> y.RS())).ToDictionary(x=> x.Key, x=> x.Sum(y=> y.RS())).First();
+
+           
+
+
+            List<Course> courses = new List<Course>()
+            {
+                new Course("CSharp Basics", "Programming", "Kovacs Adam"),
+                new Course("Advanced CSharp", "Programming", "Nagy Peter"),
+                new Course("Python Basics", "Programming", "Szabo Anna"),
+                new Course("Web Development", "Programming", "Toth Mark"),
+                new Course("English Beginner", "Language", "Smith John"),
+
+               
+            };
+            courses[0].SetPrice(25000);
+            courses[1].SetPrice(35000);
+            courses[2].SetPrice(22000);
+            courses[3].SetPrice(30000);
+            courses[4].SetPrice(18000);
+            courses[0].SPS(24);
+            courses[1].SPS(18);
+            courses[2].SPS(31);
+            courses[3].SPS(27);
+            courses[4].SPS(35);
 
     }
 }
