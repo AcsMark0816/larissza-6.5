@@ -38,6 +38,7 @@ namespace larissza7
             List<Hotel> hotels = new List<Hotel>()
 {
     new Hotel("Grand Palace", "Budapest", 5) {Rating = 9.4 },
+                
     new Hotel("City Hotel", "Budapest", 3) {Rating = 5.5},
     new Hotel("Blue Sea Resort", "Split", 4) {Rating = 6.0},
     new Hotel("Royal Beach", "Barcelona", 5){ Rating = 7.0},
@@ -171,6 +172,37 @@ namespace larissza7
             {
                 return series.Select(x => x.genre).Distinct().ToList();
             }
+                        List<Product> products = new List<Product>()
+{
+    new Product("Galaxy S24", "Phone", "Samsung"),
+    new Product("iPhone 15", "Phone", "Apple"),
+    new Product("Pixel 8", "Phone", "Google"),
+    new Product("ThinkPad E14", "Laptop", "Lenovo"),
+    new Product("MacBook Air", "Laptop", "Apple"),
+
+   
+
+
+
+        };
+            products[0].SetPrice(799);
+            products[1].SetPrice(999);
+            products[2].SetPrice(699);
+            products[3].SetPrice(599);
+            products[4].SetPrice(999);
+            products[0].SS(15);
+            products[1].SS(10);
+            products[2].SS(20);
+            products[3].SS(5);
+            products[4].SS(8);
+
+
+            
+            products.GroupBy(x => x.category).Select(y => new { Category = y.Key, Count = y.Count() });
+             products.GroupBy(x => x.manufacturer).Select(y => new { Manufacturer = y.Key, AP = y.Average(p => p.PR()) });
+            products.GroupBy(x=> x.category).Select(y => new {Category = y.Key, MP = y.OrderByDescending(p => p.PR()).First().name });
+         products.GroupBy(x=>x.category).Select(x=> x.OrderByDescending(p => p.RS()).First()).Select(y => new { Category = y.category, MS = y.category }); //<- CoPilot nem tudtam azt hogy 2 select is lehet benne
+        }
         }
 
     }
